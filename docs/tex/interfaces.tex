@@ -1,0 +1,44 @@
+\chapter{Interfaces}\label{interfaces}
+
+\input{tex/interface-apb.tex}
+
+\pagebreak
+
+\section{GPIO Interface}\label{gpio-interface}
+
+\begin{longtable}[]{@{}lccl@{}}
+\toprule
+Port & Size & Direction & Description\tabularnewline
+\midrule
+\endhead
+\texttt{GPIO\_I} & \texttt{PDATA\_SIZE} & Input & Input Signals\tabularnewline
+\texttt{GPIO\_O} & \texttt{PDATA\_SIZE} & Output & Output Signals\tabularnewline
+\texttt{GPIO\_OE} & \texttt{PDATA\_SIZE} & Output & Output Enable Signal\tabularnewline
+\bottomrule
+\caption{GPIO Interface Signals}
+\end{longtable}
+
+\subsection{GPIO\_I}\label{gpio_i}
+
+\texttt{GPIO\_I} is the input bus. The bus is \texttt{PDATA\_SIZE} bits wide and each bit
+is sampled on the rising edge of the APB4 bus clock \texttt{PCLK}. As the inputs
+may be asynchronous to the bus clock, synchronisation is implemented
+within the core. 
+
+\subsection{GPIO\_O}\label{gpio_o}
+
+\texttt{GPIO\_O} is the output bus and is \texttt{PDATA\_SIZE} bits wide. Data is driven
+onto the output bus on the rising edge of the APB4 bus clock \texttt{PCLK}.
+
+\subsection{GPIO\_OE}\label{gpio_oe}
+
+\texttt{GPIO\_OE} is an active-high Output Enable bus and is \texttt{PDATA\_SIZE} bits
+wide.
+
+The specific functionality of the \texttt{GPIO\_OE} bus is defined by the \texttt{MODE}
+register. In push-pull mode it is used to enable a bidirectional output
+buffer whose input is driven the \texttt{GPIO\_O} bus
+
+In open-drain mode the \texttt{GPIO\_OE} bus is used to enable a logic `0' to be
+driven from the \texttt{GPIO\_O} bus, and a logic '1' by disabling (`High-Z') the
+output buffer.
