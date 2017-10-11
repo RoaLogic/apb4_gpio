@@ -1,5 +1,10 @@
-Introduction
-============
+---
+Title: APB4 General Purpose Input/Output (GPIO)
+Category: Product Brief
+Author: Roa Logic
+---
+
+# Introduction
 
 The APB4 GPIO Core is fully parameterised core designed to provide a user-defined number of general purpose, bidirectional IO to a design.
 
@@ -9,8 +14,7 @@ Inputs to the core may operate asynchronously to the core and will be automatica
 
 ![APB4 GPIO Signalling<span data-label="fig:apb4-gpio-sig"></span>](assets/img/apb4-gpio-sig.png)
 
-Features
---------
+## Features
 
 -   Compliant with AMBA APB v2.0 Specification
 
@@ -20,11 +24,9 @@ Features
 
 -   Each General Output configurable as push-pull or open-drain
 
-Specifications
-==============
+# Specifications
 
-Functional Description
-----------------------
+## Functional Description
 
 The Roa Logic APB4 GPIO is a configurable, fully parameterized soft IP to enable general connectivity to a APB4 based Master (Host) It is fully compliant with the *AMBA APB v2.0* bus protocols.
 
@@ -34,8 +36,7 @@ The IP contains a single Master Interface to connect to the APB4 Host and a user
 
 The core operates synchronously with the APB4 Bus Clock. Inputs may be asynchronous to this bus clock and therefore the implements configurable length synchronisation
 
-Operating Modes
----------------
+## Operating Modes
 
 The core supports bidirectional IO pads as shown in Figure 3, where each IO may operate in a push-pull or open-drain mode. The mode of each IO is defined via the MODE register.
 
@@ -55,7 +56,7 @@ Logically the push-pull mode is configured as follows:
 
 In open-drain mode, GPIO\_O is always driven low (‘0’) and individual GPIO\_OE signals set to enable (i.e. Logic ‘0’) or high-Z (Logic ‘1’) at the output buffer corresponding to the value of the OUTPUT register.
 
-![Open Drain Configuration<span data-label="fig:apb4-gpio-pp"></span>](assets/img/apb4-gpio-od.png)
+![Open Drain Configuration<span data-label="fig:apb4-gpio-od"></span>](assets/img/apb4-gpio-od.png)
 
 ### Pad Inference
 
@@ -63,16 +64,13 @@ The inclusion of technology specific IO Pads is not part of the APB4 GPIO core a
 
 `PAD[n] <= GPIO_OE[n] ? GPIO_O[n] : 1’bz;`
 
-Configurations
-==============
+# Configurations
 
-Introduction
-------------
+## Introduction
 
 The Roa Logic AHB-Lite APB4 GPIO is a fully configurable General Purpose Input/Output core. The core parameters and configuration options are described in this section.
 
-Core Parameters
----------------
+## Core Parameters
 
 | Parameter      |   Type  | Default | Description                                     |
 |:---------------|:-------:|:-------:|:------------------------------------------------|
@@ -136,11 +134,9 @@ In push-pull mode, data written to the OUTPUT register directly drives the outpu
 
 In open-drain mode, `GPIO_O` is permanently driven low (‘0’) and the OUTPUT register sets `GPIO_OE` to ‘Output’ to assert a logic ‘0’ on the bus, or ‘Input’ (i.e. High-Z) to assert a logic ‘1’.
 
-Interfaces
-==========
+# Interfaces
 
-APB4 (Peripheral) Interface
----------------------------
+## APB4 (Peripheral) Interface
 
 The APB4Interface is a regular APB4 Master Interface. All signals defined in the protocol are supported as described below. See the *AMBA APB Protocol v2.0 Specifications* for a complete description of the signals.
 
@@ -216,8 +212,7 @@ There is one `PSTRB` signal per byte lane of the APB4 write data bus (`PWDATA`).
 
 `PSLVERR` indicates a failed data transfer when asserted (‘1’). As APB4 peripherals are not required to support this signal it must be tied LOW (‘0’) when unused.
 
-GPIO Interface
---------------
+## GPIO Interface
 
 | Port      |     Size     | Direction | Description          |
 |:----------|:------------:|:---------:|:---------------------|
@@ -241,8 +236,7 @@ The specific functionality of the `GPIO_OE` bus is defined by the `MODE` registe
 
 In open-drain mode the `GPIO_OE` bus is used to enable a logic ‘0’ to be driven from the `GPIO_O` bus, and a logic ’1’ by disabling (‘High-Z’) the output buffer.
 
-Resources
-=========
+# Resources
 
 Below are some example implementations for various platforms. All implementations are push button, no effort has been undertaken to reduce area or improve performance.
 
@@ -252,8 +246,7 @@ Below are some example implementations for various platforms. All implementation
 |          |     |             |        |                   |
 |          |     |             |        |                   |
 
-Revision History
-================
+# Revision History
 
 | Date | Rev. | Comments |
 |:-----|:-----|:---------|
@@ -261,5 +254,3 @@ Revision History
 |      |      |          |
 |      |      |          |
 |      |      |          |
-
-
