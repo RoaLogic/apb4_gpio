@@ -10,7 +10,7 @@ Author: Roa Logic
 
 The APB4 GPIO Core is fully parameterised core designed to provide a user-defined number of general purpose, bidirectional IO to a design.
 
-The IO are accessible via an [AMBA APB v2.0 Specification ** ](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0024c/index.html)interface – typically referred to as APB4 – and the core operates synchronously with the rising edge of the APB4 Bus Clock..
+The IO are accessible via an [AMBA APB v2.0 Specification](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0024c/index.html)interface – typically referred to as APB4 – and the core operates synchronously with the rising edge of the APB4 Bus Clock..
 
 Inputs to the core may operate asynchronously to the core and will be automatically synchronised to the bus clock. Outputs may be configured to operate in push-pull mode or open-drain
 
@@ -19,9 +19,11 @@ Inputs to the core may operate asynchronously to the core and will be automatica
 ## Documentation
 [Datasheet](DATASHEET.md)
 
+- [PDF Format](docs/apb4_gpio_datasheet.pdf)
+
 ## Features
 
-- Compliant with [AMBA APB v2.0 Specification **](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0024c/index.html)
+- Compliant with [AMBA APB v2.0 Specification](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0024c/index.html)
 - User-defined number of Bi-directional General Purpose IO
 - Automatic synchronisation of General Inputs to Bus Clock
 - Each General Output configurable as push-pull or open-drain

@@ -248,19 +248,21 @@ In open-drain mode the `GPIO_OE` bus is used to enable a logic ‘0’ to be dri
 
 ## Resources
 
-Below are some example implementations for various platforms. All implementations are push button, no effort has been undertaken to reduce area or improve performance.
+Below are some example implementations for various platforms. All implementations are push button, with no effort undertaken to reduce area or improve performance.
 
-| Platform | DFF | Logic Cells | Memory | Performance (MHz) |
-|:---------|:----|:------------|:-------|:------------------|
-|          |     |             |        |                   |
-|          |     |             |        |                   |
-|          |     |             |        |                   |
+| **Platform** | **DFF** | **Logic Cells/Elements** | **Memory** | **Performance (MHz)** |
+|:-------------|:-------:|:------------------------:|:----------:|:---------------------:|
+|              |         |                          |            |                       |
+|              |         |                          |            |                       |
+|              |         |                          |            |                       |
+
+Note: This table will be updated as more examples are compiled.
 
 ## Revision History
 
-| Date | Rev. | Comments |
-|:-----|:-----|:---------|
-|      | 1.0  |          |
-|      |      |          |
-|      |      |          |
-|      |      |          |
+|   **Date**  | **Rev.** | **Comments**    |
+|:-----------:|:--------:|:----------------|
+| 13-Oct-2017 |    1.0   | Initial Release |
+|             |          |                 |
+|             |          |                 |
+|             |          |                 |
