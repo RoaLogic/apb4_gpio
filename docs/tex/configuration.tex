@@ -1,0 +1,122 @@
+\chapter{Configurations}\label{configurations}
+
+\section{Introduction}\label{introduction-1}
+
+The Roa Logic AHB-Lite APB4 GPIO is a fully configurable General Purpose
+Input/Output core. The core parameters and configuration options are
+described in this section.
+
+\section{Core Parameters}\label{core-parameters}
+
+\begin{longtable}[]{@{}lccl@{}}
+\toprule
+Parameter & Type & Default & Description\tabularnewline
+\midrule
+\endhead
+\texttt{PDATA\_SIZE} & Integer & 8 & APB4 Data Bus \& GPIO Size\tabularnewline
+\texttt{INPUT\_STAGES} & Integer & 3 & Number of \texttt{GPIO\_I} input synchronization
+stages\tabularnewline
+\bottomrule
+\caption{Core Parameters}
+\end{longtable}
+
+\subsection{PDATA\_SIZE}\label{pdata_size}
+
+The \texttt{PDATA\_SIZE} parameter specifies the width of the APB4 data bus and
+corresponding GPIO interface width. This parameter must equal an integer
+multiple of bytes.
+
+\subsection{INPUT\_STAGES}\label{input_stages}
+
+The APB4 GPIO inputs are sampled on the rising edge of the APB4 bus
+clock (\texttt{PCLK}). As these inputs may be asynchronous to the bus clock, the
+core automatically synchronises these signals and the \texttt{INPUT\_STAGES}
+parameter determines the number of synchronisation stages.
+
+Increasing this parameter reduces the possibility of metastability due
+to input signals changing state while being sampled, but at the cost of
+increased latency.
+
+The minimum and default value of the \texttt{INPUT\_STAGES} parameter is 3
+
+\subsection{Registers}\label{registers}
+
+The APB4 GPIO core implements 4 user accessible registers. These are
+described below:
+
+\begin{longtable}[]{@{}lccl@{}}
+\toprule
+\textbf{Register} & \textbf{Address} & \textbf{Access} & \textbf{Function}\tabularnewline
+\midrule
+\endhead
+\texttt{INPUT} & \texttt{Base + 0x3} & Read Only & Input Data Store\tabularnewline
+\texttt{OUTPUT} & \texttt{Base + 0x2} & Read/Write & Output Data Store\tabularnewline
+\texttt{DIRECTION} & \texttt{Base + 0x1} & Read/Write & Output Enable
+control\tabularnewline
+\texttt{MODE} & \texttt{Base + 0x0} & Read/Write & Push-Pull or Open-Drain
+Mode\tabularnewline
+\bottomrule
+\caption{User Registers}
+\end{longtable}
+
+\subsection{INPUT}\label{input}
+
+INPUT is a \texttt{PDATA\_SIZE} bits wide read-only register accessible at the
+address 0x3.
+
+On the rising edge of the APB4 Bus Clock (\texttt{PCLK}) input data on pins
+\texttt{GPIO\_I} is sampled, synchronised and stored in the \texttt{INPUT} register where
+it may be read via the APB4 Bus Interface.
+
+\subsection{OUTPUT}\label{output}
+
+OUTPUT is a \texttt{PDATA\_SIZE} bits wide read/write register accessible at the
+address \texttt{0x2}.
+
+Data to be transmitted from the APB4 GPIO core via the \texttt{GPIO\_O} \&
+\texttt{GPIO\_OE} buses is written from the APB4 Interface to the OUTPUT
+register.
+
+\subsection{DIRECTION}\label{direction}
+
+DIRECTION is a \texttt{PDATA\_SIZE} bits
+wide active-high read/write register, accessible at the address \texttt{0x1}, and
+controls the output enable bus \texttt{GPIO\_OE}.
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\textbf{DIRECTION[n]} & \textbf{Direction}\tabularnewline
+\midrule
+\endhead
+0 & Input\tabularnewline
+1 & Output\tabularnewline
+\bottomrule
+\caption{DIRECTION Register}
+\end{longtable}
+
+\subsection{MODE}\label{mode}
+
+MODE is a PDATA\_SIZE bits wide Read/Write register accessible at the
+address 0x0. It individually sets the operating mode for each signal of
+the GPIO\_O and GPIO\_OE buses as either push-pull or open drain, as
+follows:
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\textbf{MODE[n]} & \textbf{Operating Mode}\tabularnewline
+\midrule
+\endhead
+0 & Push-Pull\tabularnewline
+1 & Open Drain\tabularnewline
+\bottomrule
+\caption{MODE Register}
+\end{longtable}
+
+In push-pull mode, data written to the OUTPUT register directly drives
+the output bus \texttt{GPIO\_O}. The \texttt{DIRECTION} register is then used to enable
+\texttt{GPIO\_O} to drive the IO pad when set to `Output' mode (`1').
+
+In open-drain mode, \texttt{GPIO\_O} is permanently driven low (`0') and the
+OUTPUT register sets \texttt{GPIO\_OE} to `Output' to assert a logic `0' on the
+bus, or `Input' (i.e. High-Z) to assert a logic `1'.
+
