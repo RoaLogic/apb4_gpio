@@ -1,5 +1,18 @@
+<<<<<<< HEAD
 # APB4 General Purpose IO (GPIO)
 
+=======
+---
+Title: APB4 General Purpose IO
+Category: Product Brief
+Author: Roa Logic
+---
+
+
+
+# APB4 General Purpose IO (GPIO)
+
+>>>>>>> GH_Pages
 The APB4 GPIO Core is fully parameterised core designed to provide a user-defined number of general purpose, bidirectional IO to a design.
 
 The IO are accessible via an [AMBA APB v2.0 Specification](http://infocenter.arm.com/help/topic/com.arm.doc.ihi0024c/index.html)interface – typically referred to as APB4 – and the core operates synchronously with the rising edge of the APB4 Bus Clock..
@@ -30,4 +43,8 @@ Released under the RoaLogic [Non-Commerical License](/LICENSE.md)
 
 ## Dependencies
 
+<<<<<<< HEAD
 This release requires the ahb3lite package found here https://github.com/RoaLogic/ahb3lite_pkg
+=======
+This release requires the ahb3lite package found here https://github.com/RoaLogic/ahb3lite_pkg
+>>>>>>> GH_Pages
