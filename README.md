@@ -1,11 +1,3 @@
----
-Title: APB4 General Purpose IO
-Category: Product Brief
-Author: Roa Logic
----
-
-
-
 # APB4 General Purpose IO (GPIO)
 
 The APB4 GPIO Core is fully parameterised core designed to provide a user-defined number of general purpose, bidirectional IO to a design.
