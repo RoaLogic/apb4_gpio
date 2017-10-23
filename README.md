@@ -9,9 +9,8 @@ Inputs to the core may operate asynchronously to the core and will be automatica
 ![apb4-gpio-sys](assets/img/apb4-gpio-sys.png)
 
 ## Documentation
-[Datasheet](DATASHEET.md)
-
-- [PDF Format](docs/apb4_gpio_datasheet.pdf)
+- [Datasheet](DATASHEET.md)
+  - [PDF Format](docs/apb4_gpio_datasheet.pdf)
 
 ## Features
 
