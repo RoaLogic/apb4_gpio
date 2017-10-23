@@ -26,7 +26,7 @@ Inputs to the core may operate asynchronously to the core and will be automatica
 
 ## License
 
-Released under the RoaLogic [Non-Commerical License](/LICENSE.md)
+Released under the RoaLogic [Non-Commercial License](/LICENSE.md)
 
 ## Dependencies
 
