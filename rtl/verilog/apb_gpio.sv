@@ -1,38 +1,60 @@
-/////////////////////////////////////////////////////////////////
-//                                                             //
-//    ██████╗  ██████╗  █████╗                                 //
-//    ██╔══██╗██╔═══██╗██╔══██╗                                //
-//    ██████╔╝██║   ██║███████║                                //
-//    ██╔══██╗██║   ██║██╔══██║                                //
-//    ██║  ██║╚██████╔╝██║  ██║                                //
-//    ╚═╝  ╚═╝ ╚═════╝ ╚═╝  ╚═╝                                //
-//          ██╗      ██████╗  ██████╗ ██╗ ██████╗              //
-//          ██║     ██╔═══██╗██╔════╝ ██║██╔════╝              //
-//          ██║     ██║   ██║██║  ███╗██║██║                   //
-//          ██║     ██║   ██║██║   ██║██║██║                   //
-//          ███████╗╚██████╔╝╚██████╔╝██║╚██████╗              //
-//          ╚══════╝ ╚═════╝  ╚═════╝ ╚═╝ ╚═════╝              //
-//                                                             //
-//    APB GPIO                                                 //
-//                                                             //
-/////////////////////////////////////////////////////////////////
-//                                                             //
-//             Copyright (C) 2016-2017 ROA Logic BV            //
-//             www.roalogic.com                                //
-//                                                             //
-//    Unless specifically agreed in writing, this software is  //
-//  licensed under the RoaLogic Non-Commercial License         //
-//  version-1.0 (the "License"), a copy of which is included   //
-//  with this file or may be found on the RoaLogic website     //
-//  http://www.roalogic.com. You may not use the file except   //
-//  in compliance with the License.                            //
-//                                                             //
-//    THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY        //
-//  EXPRESS OF IMPLIED WARRANTIES OF ANY KIND.                 //
-//  See the License for permissions and limitations under the  //
-//  License.                                                   //
-//                                                             //
-/////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////
+//   ,------.                    ,--.                ,--.          //
+//   |  .--. ' ,---.  ,--,--.    |  |    ,---. ,---. `--' ,---.    //
+//   |  '--'.'| .-. |' ,-.  |    |  |   | .-. | .-. |,--.| .--'    //
+//   |  |\  \ ' '-' '\ '-'  |    |  '--.' '-' ' '-' ||  |\ `--.    //
+//   `--' '--' `---'  `--`--'    `-----' `---' `-   /`--' `---'    //
+//                                             `---'               //
+//    APB4 GPIO                                                    //
+//                                                                 //
+/////////////////////////////////////////////////////////////////////
+//                                                                 //
+//             Copyright (C) 2016-2018 ROA Logic BV                //
+//             www.roalogic.com                                    //
+//                                                                 //
+//     Unless specifically agreed in writing, this software is     //
+//   licensed under the RoaLogic Non-Commercial License            //
+//   version-1.0 (the "License"), a copy of which is included      //
+//   with this file or may be found on the RoaLogic website        //
+//   http://www.roalogic.com. You may not use the file except      //
+//   in compliance with the License.                               //
+//                                                                 //
+//     THIS SOFTWARE IS PROVIDED "AS IS" AND WITHOUT ANY           //
+//   EXPRESS OF IMPLIED WARRANTIES OF ANY KIND.                    //
+//   See the License for permissions and limitations under the     //
+//   License.                                                      //
+//                                                                 //
+/////////////////////////////////////////////////////////////////////
+
+// +FHDR -  Semiconductor Reuse Standard File Header Section  -------
+// FILE NAME      : apb_gpio.sv
+// DEPARTMENT     :
+// AUTHOR         : rherveille
+// AUTHOR'S EMAIL :
+// ------------------------------------------------------------------
+// RELEASE HISTORY
+// VERSION DATE        AUTHOR      DESCRIPTION
+// 1.0     2017-03-29  rherveille  initial release
+// ------------------------------------------------------------------
+// KEYWORDS : AMBA APB4 General Purpose IO GPIO     
+// ------------------------------------------------------------------
+// PURPOSE  : General purpose IO          
+// ------------------------------------------------------------------
+// PARAMETERS
+//  PARAM NAME        RANGE    DESCRIPTION              DEFAULT UNITS
+//  PDATA_SIZE        1+       Databus (and GPIO) size  8       bits
+// ------------------------------------------------------------------
+// REUSE ISSUES 
+//   Reset Strategy      : external asynchronous active low; PRESETn
+//   Clock Domains       : PCLK, rising edge
+//   Critical Timing     : 
+//   Test Features       : na
+//   Asynchronous I/F    : no
+//   Scan Methodology    : na
+//   Instantiations      : na
+//   Synthesizable (y/n) : Yes
+//   Other               :                                         
+// -FHDR-------------------------------------------------------------
 
 
 /*
