@@ -9,7 +9,7 @@
 //                                                                 //
 /////////////////////////////////////////////////////////////////////
 //                                                                 //
-//             Copyright (C) 2016-2018 ROA Logic BV                //
+//             Copyright (C) 2017-2020 ROA Logic BV                //
 //             www.roalogic.com                                    //
 //                                                                 //
 //     Unless specifically agreed in writing, this software is     //
@@ -126,7 +126,7 @@ module apb_gpio #(
              IRQ_ENA   = 8;
 
   //number of synchronisation flipflop stages on GPIO inputs
-  localparam INPUT_STAGES = 3;
+  localparam INPUT_STAGES = 2;
 
 
   //////////////////////////////////////////////////////////////////
@@ -154,8 +154,6 @@ module apb_gpio #(
 
   //Input register, to prevent metastability
   logic [PDATA_SIZE-1:0] input_regs [INPUT_STAGES];
-
-  integer n;
 
 
   //////////////////////////////////////////////////////////////////
@@ -285,7 +283,7 @@ module apb_gpio #(
    * Internals
    */
   always @(posedge PCLK)
-    for (n=0; n<INPUT_STAGES; n++)
+    for (int n=0; n<INPUT_STAGES; n++)
        if (n==0) input_regs[n] <= gpio_i;
        else      input_regs[n] <= input_regs[n-1];
 
@@ -297,7 +295,7 @@ module apb_gpio #(
   // 0=push-pull    drive out_reg value onto transmitter input
   // 1=open-drain   always drive '0' onto transmitter
   always @(posedge PCLK)
-    for (n=0; n<PDATA_SIZE; n++)
+    for (int n=0; n<PDATA_SIZE; n++)
       gpio_o[n] <= mode_reg[n] ? 1'b0 : out_reg[n];
 
 
@@ -307,7 +305,7 @@ module apb_gpio #(
   //            1=open-drain  1=Hi-Z   disable transmitter
   //                          0=low    enable transmitter
   always @(posedge PCLK)
-    for (n=0; n<PDATA_SIZE; n++)
+    for (int n=0; n<PDATA_SIZE; n++)
       gpio_oe[n] <= dir_reg[n] & ~(mode_reg[n] ? out_reg[n] : 1'b0);
 
 
@@ -334,12 +332,12 @@ module apb_gpio #(
 
   //trigger status
   always_comb
-    for (n=0; n<PDATA_SIZE; n++)
+    for (int n=0; n<PDATA_SIZE; n++)
       case (tr_type_reg[n])
-        0: tr_status = (tr_lvl0_reg[n] & ~in_reg[n]) |
-                       (tr_lvl1_reg[n] &  in_reg[n]);
-        1: tr_status = (tr_lvl0_reg[n] & tr_falling_edge_reg[n]) |
-                       (tr_lvl1_reg[n] & tr_rising_edge_reg [n]);
+        0: tr_status[n] = (tr_lvl0_reg[n] & ~in_reg[n]) |
+                          (tr_lvl1_reg[n] &  in_reg[n]);
+        1: tr_status[n] = (tr_lvl0_reg[n] & tr_falling_edge_reg[n]) |
+                          (tr_lvl1_reg[n] & tr_rising_edge_reg [n]);
       endcase
 
 
