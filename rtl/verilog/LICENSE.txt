@@ -56,7 +56,7 @@ ON OUR COMMERCIAL LICENSE TERMS
         a profit;
  2.1.2. distribute the Product, provided the original disclaimer and copyright
         notice are retained and this Agreement is part of the distribution.
- 2.2. Roa Logic hereby grants limited, non-exclusive, non-transferable,
+ 2.2. Roa Logic hereby grants you a limited, non-exclusive, non-transferable,
       no-charge, and royalty-free patent license to use, modify, and
       distribute the Product provided you do so for non-commercial (personal,
       educational, research and development, demonstration) purposes, where
