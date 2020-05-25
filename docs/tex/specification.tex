@@ -17,7 +17,7 @@ bi-directional bus as shown below:
 	\label{fig:apb4-gpio-sys}
 \end{figure}
 
-The core operates synchronously with the APB4 Bus Clock. The core synchronises all inputs to the APB4 Bus Clock domain.
+The core operates synchronously with the APB4 Bus Clock. The core synchronises all \texttt{GPIO\_I} inputs to the APB4 Bus Clock domain.
 
 \section{Operating Modes}\label{operating-modes}
 
@@ -35,7 +35,7 @@ defined via the MODE register.
 
 \subsection{Push-Pull Mode}\label{push-pull-mode}
 
-In push-pull mode, the \texttt{GPIO\_O} bus is driven from an internal \texttt{OUTPUT}
+In push-pull mode, each bit of the \texttt{GPIO\_O} bus is driven from an internal \texttt{OUTPUT}
 register and \texttt{GPIO\_OE} is controlled via the
 DIRECTION register
 
@@ -51,8 +51,8 @@ Logically the push-pull mode is configured as follows:
 
 \subsection{Open-Drain Mode}\label{open-drain-mode}
 
-In open-drain mode, GPIO\_O is always driven low (`0') and individual
-GPIO\_OE signals set to enable (i.e. Logic `0') or high-Z (Logic `1') at
+In open-drain mode, each bit of GPIO\_O is always driven low (`0') and individual
+\texttt{GPIO\_OE} signals set to enable (i.e. Logic `0') or high-Z (Logic `1') at
 the output buffer corresponding to the value of the OUTPUT register.
 
 \begin{figure}[tbh]

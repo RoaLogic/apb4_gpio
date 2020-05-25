@@ -11,6 +11,8 @@ Inputs to the core may operate asynchronously to the core and will be
 automatically synchronised to the bus clock. Outputs may be configured
 to operate in push-pull mode or open-drain.
 
+Inputs may also be individually configured to act as level or edge sensitive interrupts. A single IRQ output is provided to connect to the host.
+
 \begin{figure}[tbh]
 	\centering
 	\includegraphics{assets/img/apb4-gpio-sig}
@@ -29,4 +31,8 @@ to operate in push-pull mode or open-drain.
   Automatic synchronisation of General Inputs to Bus Clock
 \item
   Each General Output configurable as push-pull or open-drain
+\item
+  Programmable IRQ generation
+\item
+  Each General input individually configurable as a level or edge triggered interrupt.
 \end{itemize}

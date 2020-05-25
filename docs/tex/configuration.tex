@@ -28,21 +28,11 @@ multiple of bytes.
 
 \subsection{INPUT\_STAGES}\label{input_stages}
 
-The APB4 GPIO inputs are sampled on the rising edge of the APB4 bus
-clock (\texttt{PCLK}). As these inputs may be asynchronous to the bus clock, the
-core automatically synchronises these signals and the \texttt{INPUT\_STAGES}
-parameter determines the number of synchronisation stages.
+The APB4 GPIO inputs are sampled on the rising edge of the APB4 bus clock (\texttt{PCLK}). As these inputs may be asynchronous to the bus clock, the core automatically synchronises these signals and the \texttt{INPUT\_STAGES} parameter determines the number of synchronisation stages. Increasing this parameter reduces the possibility of metastability due to input signals changing state while being sampled, but at the cost of increased latency. The default value of the \texttt{INPUT\_STAGES} parameter is 2
 
-Increasing this parameter reduces the possibility of metastability due
-to input signals changing state while being sampled, but at the cost of
-increased latency.
+\section{Control Registers}\label{registers}
 
-The minimum value of the \texttt{INPUT\_STAGES} parameter is 2
-
-\subsection{Registers}\label{registers}
-
-The APB4 GPIO core implements 4 user accessible registers. These are
-described below:
+The APB4 GPIO core implements user accessible registers as described below:
 
 \begin{longtable}[]{@{}lccl@{}}
 \toprule
@@ -54,54 +44,19 @@ described below:
 \texttt{OUTPUT} & \texttt{Base + 0x2} & Read/Write & Output Data Store\tabularnewline
 \texttt{INPUT} & \texttt{Base + 0x3} & Read Only & Input Data Store\tabularnewline
 \texttt{TRIGGER\_TYPE} & \texttt{Base + 0x4} & Read/Write & Trigger Type\tabularnewline
-\texttt{TRIGGER\_LVL0} & \texttt{Base + 0x5} & Read/Write & Trigger Level Sense 0\tabularnewline
-\texttt{TRIGGER\_LVL1} & \texttt{Base + 0x6} & Read/Write & Trigger Level Sense 1\tabularnewline
+\texttt{TRIGGER\_LVL0} & \texttt{Base + 0x5} & Read/Write & Trigger Sense 0\tabularnewline
+\texttt{TRIGGER\_LVL1} & \texttt{Base + 0x6} & Read/Write & Trigger Sense 1\tabularnewline
 \texttt{TRIGGER\_STATUS} & \texttt{Base + 0x7} & Read/Write & Trigger Status\tabularnewline
 \texttt{IRQ\_ENABLE} & \texttt{Base + 0x8} & Read/Write & Enable Interrupts\tabularnewline
 \bottomrule
 \caption{User Registers}
 \end{longtable}
 
-\subsection{INPUT}\label{input}
-
-INPUT is a \texttt{PDATA\_SIZE} bits wide read-only register accessible at the
-address 0x3.
-
-On the rising edge of the APB4 Bus Clock (\texttt{PCLK}) input data on pins
-\texttt{GPIO\_I} is sampled, synchronised and stored in the \texttt{INPUT} register where
-it may be read via the APB4 Bus Interface.
-
-\subsection{OUTPUT}\label{output}
-
-OUTPUT is a \texttt{PDATA\_SIZE} bits wide read/write register accessible at the
-address \texttt{0x2}.
-
-Data to be transmitted from the APB4 GPIO core via the \texttt{GPIO\_O} \&
-\texttt{GPIO\_OE} buses is written from the APB4 Interface to the OUTPUT
-register.
-
-\subsection{DIRECTION}\label{direction}
-
-DIRECTION is a \texttt{PDATA\_SIZE} bits
-wide active-high read/write register, accessible at the address \texttt{0x1}, and
-controls the output enable bus \texttt{GPIO\_OE}.
-
-\begin{longtable}[]{@{}cl@{}}
-\toprule
-\textbf{DIRECTION[n]} & \textbf{Direction}\tabularnewline
-\midrule
-\endhead
-0 & Input\tabularnewline
-1 & Output\tabularnewline
-\bottomrule
-\caption{DIRECTION Register}
-\end{longtable}
-
 \subsection{MODE}\label{mode}
 
 MODE is a PDATA\_SIZE bits wide Read/Write register accessible at the
 address 0x0. It individually sets the operating mode for each signal of
-the GPIO\_O and GPIO\_OE buses as either push-pull or open drain, as
+the \texttt{GPIO\_O} and \texttt{GPIO\_OE} buses as either push-pull or open drain, as
 follows:
 
 \begin{longtable}[]{@{}cl@{}}
@@ -121,3 +76,113 @@ the output bus \texttt{GPIO\_O}. The \texttt{DIRECTION} register is then used to
 
 In open-drain mode, \texttt{GPIO\_O} is connected such that the IO Pad is driven low ('0') when the output is '0' and is High-Z, pulled high via an external resistor, when the output is '1'.
 
+\subsection{DIRECTION}\label{direction}
+
+DIRECTION is a \texttt{PDATA\_SIZE} bits wide active-high read/write register, accessible at the address \texttt{0x1}, and controls the output enable bus \texttt{GPIO\_OE[n]}, effectively controlling if \texttt{PAD[n]} operates as an input or an output.
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\textbf{DIRECTION[n]} & \textbf{Direction}\tabularnewline
+\midrule
+\endhead
+0 & Input\tabularnewline
+1 & Output\tabularnewline
+\bottomrule
+\caption{DIRECTION Register}
+\end{longtable}
+
+\subsection{OUTPUT}\label{output}
+
+OUTPUT is a \texttt{PDATA\_SIZE} bits wide read/write register accessible at the address \texttt{0x2}.
+
+OUTPUT specifies the \texttt{PAD[n]} level when \texttt{GPIO[n]} is programmed as an output. Writing a ‘0’ drives a low level onto \texttt{PAD[n]}, whereas writing a ‘1’ drives a ‘1’ (push-pull) or high-z(open-drain) onto \texttt{PAD[n]}.
+
+\subsection{INPUT}\label{input}
+
+INPUT is a \texttt{PDATA\_SIZE} bits wide read-only register accessible at the address \texttt{0x3}.
+
+On the rising edge of the APB4 Bus Clock (\texttt{PCLK}) input data on pins
+\texttt{GPIO\_I} is sampled, synchronised and stored in the \texttt{INPUT} register where it may be read via the APB4 Bus Interface.
+
+\subsection{TRIGGER\_TYPE}\label{triggertype}
+
+TRIGGER\_TYPE is a \texttt{PDATA\_SIZE} bits wide Read/Write register accessible at address \texttt{0x4}.
+
+Each bit of the register sets if a \texttt{GPIO\_I} input bit is configured as a level or edge sensitive interupt trigger as defined below:
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\textbf{TRIGGER\_TYPE[n]} & \textbf{Type}\tabularnewline
+\midrule
+\endhead
+0 & Level\tabularnewline
+1 & Edge\tabularnewline
+\bottomrule
+\caption{TRIGGER\_TYPE Register}
+\end{longtable}
+
+\subsection{TRIGGER\_LVL0 and TRIGGER\_LVL1}\label{triggermode}
+
+TRIGGER\_LVL0 and TRIGGER\_LVL1 are \texttt{PDATA\_SIZE} bits wide Read/Write registers accessible at addresses \texttt{0x5} and \texttt{0x6} respectively.
+
+TRIGGER\_LVL0 and TRIGGER\_LVL1 registers set the trigger sense of an interrupt input on \texttt{GPIO\_I}.  Based on the corresponding TRIGGER\_TYPE bit defining a \texttt{GPIO\_I[n]} input as level or edge triggered, an interrupt is triggered when the \texttt{GPIO\_I[n]} input is low and/or high, or on a rising and/or falling edge transition as documented in the tables below.
+
+Setting both registers to all '0' means that triggers are disabled and no interrput will be generated from any \texttt{GPIO\_I} input. This is the default state. Alternatively, setting TRIGGER\_TYPE to level ('0') and writing a '1' into TRIGGER\_LVL0 and TRIGGER\_LVL1 registers will generate a permanently triggered interrupt.
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule
+\textbf{TRIGGER\_LVL0[n]} & \textbf{Level Triggered} & \textbf{Edge Triggered}\tabularnewline
+\midrule
+\endhead
+0 & no trigger when low & no trigger on falling edge\tabularnewline
+1 & trigger when low & trigger on falling edge\tabularnewline
+\bottomrule
+\caption{TRIGGER\_LVL0 Register}
+\end{longtable}
+
+\begin{longtable}[]{@{}ccc@{}}
+\toprule
+\textbf{TRIGGER\_LVL1[n]} & \textbf{Level Triggered} & \textbf{Edge Triggered}\tabularnewline
+\midrule
+\endhead
+0 & no trigger when high & no trigger on rising edge\tabularnewline
+1 & trigger when high & trigger on rising edge\tabularnewline
+\bottomrule
+\caption{TRIGGER\_LVL1 Register}
+\end{longtable}
+
+\subsection{TRIGGER\_STATUS}\label{triggerstatus}
+
+TRIGGER\_STATUS is a \texttt{PDATA\_SIZE} bits wide Read/Write register accessible at address \texttt{0x7}.
+
+Each bit of TRIGGER\_STATUS is set ('1') if an trigger condition is detected on the corresponding \texttt{GPIO\_I[n]} input according to the settings of TRIGGER\_TYPE and TRIGGER\_LVL0/1. If both TRIGGER\_STATUS[n] and IRQ\_ENABLE[n] are set ('1'), and interrupt is generated on the \texttt{IRQ\_O} pin.
+
+TRIGGER\_STATUS may be read to determine if a trigger condition has occured on the corresponding input. Writing a '1' to TRIGGER\_STATUS[n] will clear the status, unless a new trigger is detect simultaneously, in which case TRIGGER\_STATUS[n] will remain set.
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\textbf{TRIGGER\_STATUS[n]} & \textbf{Status}\tabularnewline
+\midrule
+\endhead
+0 & no trigger detected/irq pending\tabularnewline
+1 & trigger detected/irq pending\tabularnewline
+\bottomrule
+\caption{TRIGGER\_STATUS Register}
+\end{longtable}
+
+\subsection{IRQ\_ENABLE}\label{irqenable}
+
+IRQ\_ENABLE is a \texttt{PDATA\_SIZE} bits wide Read/Write register accessible at address \texttt{0x8}.
+
+IRQ\_ENABLE determines if the \texttt{IRQ\_O} pin will be asserted when a trigger condition occurs, and so enabling if interupts are generated from the APB4 GPIO core
+
+\begin{longtable}[]{@{}cl@{}}
+\toprule
+\textbf{IRQ\_ENABLE[n]} & \textbf{Definition}\tabularnewline
+\midrule
+\endhead
+0 & disable irq generation\tabularnewline
+1 & enable irq generation\tabularnewline
+\bottomrule
+\caption{IRQ\_ENABLE Register}
+\end{longtable}
