@@ -54,10 +54,7 @@ The APB4 GPIO core implements user accessible registers as described below:
 
 \subsection{MODE}\label{mode}
 
-MODE is a PDATA\_SIZE bits wide Read/Write register accessible at the
-address 0x0. It individually sets the operating mode for each signal of
-the \texttt{GPIO\_O} and \texttt{GPIO\_OE} buses as either push-pull or open drain, as
-follows:
+MODE is a PDATA\_SIZE bits wide Read/Write register accessible at the address 0x0. Each bit of the register individually sets the operating mode for each signal of the \texttt{GPIO\_O} and \texttt{GPIO\_OE} buses as either push-pull or open drain, as follows:
 
 \begin{longtable}[]{@{}cl@{}}
 \toprule
@@ -95,7 +92,7 @@ DIRECTION is a \texttt{PDATA\_SIZE} bits wide active-high read/write register, a
 
 OUTPUT is a \texttt{PDATA\_SIZE} bits wide read/write register accessible at the address \texttt{0x2}.
 
-OUTPUT specifies the \texttt{PAD[n]} level when \texttt{GPIO[n]} is programmed as an output. Writing a ‘0’ drives a low level onto \texttt{PAD[n]}, whereas writing a ‘1’ drives a ‘1’ (push-pull) or high-z(open-drain) onto \texttt{PAD[n]}.
+Each bit of the OUTPUT register specifies the \texttt{PAD[n]} level when \texttt{GPIO[n]} is programmed as an output. Writing a ‘0’ drives a low level onto \texttt{PAD[n]}, whereas writing a ‘1’ drives a ‘1’ (push-pull) or high-z(open-drain) onto \texttt{PAD[n]}.
 
 \subsection{INPUT}\label{input}
 
@@ -125,9 +122,9 @@ Each bit of the register sets if a \texttt{GPIO\_I} input bit is configured as a
 
 TRIGGER\_LVL0 and TRIGGER\_LVL1 are \texttt{PDATA\_SIZE} bits wide Read/Write registers accessible at addresses \texttt{0x5} and \texttt{0x6} respectively.
 
-TRIGGER\_LVL0 and TRIGGER\_LVL1 registers set the trigger sense of an interrupt input on \texttt{GPIO\_I}.  Based on the corresponding TRIGGER\_TYPE bit defining a \texttt{GPIO\_I[n]} input as level or edge triggered, an interrupt is triggered when the \texttt{GPIO\_I[n]} input is low and/or high, or on a rising and/or falling edge transition as documented in the tables below.
+Each bit of the TRIGGER\_LVL0 and TRIGGER\_LVL1 registers set the trigger sense of an interrupt input on \texttt{GPIO\_I}.  Based on the corresponding TRIGGER\_TYPE bit defining a \texttt{GPIO\_I[n]} input as level or edge triggered, an interrupt is triggered when the \texttt{GPIO\_I[n]} input is low and/or high, or on a rising and/or falling edge transition as documented in the tables below.
 
-Setting both registers to all '0' means that triggers are disabled and no interrput will be generated from any \texttt{GPIO\_I} input. This is the default state. Alternatively, setting TRIGGER\_TYPE to level ('0') and writing a '1' into TRIGGER\_LVL0 and TRIGGER\_LVL1 registers will generate a permanently triggered interrupt.
+Setting both registers to all '0' means that triggers are disabled and no interrupt will be generated from any \texttt{GPIO\_I} input. This is the default state.
 
 \begin{longtable}[]{@{}ccc@{}}
 \toprule
@@ -155,7 +152,7 @@ Setting both registers to all '0' means that triggers are disabled and no interr
 
 TRIGGER\_STATUS is a \texttt{PDATA\_SIZE} bits wide Read/Write register accessible at address \texttt{0x7}.
 
-Each bit of TRIGGER\_STATUS is set ('1') if an trigger condition is detected on the corresponding \texttt{GPIO\_I[n]} input according to the settings of TRIGGER\_TYPE and TRIGGER\_LVL0/1. If both TRIGGER\_STATUS[n] and IRQ\_ENABLE[n] are set ('1'), and interrupt is generated on the \texttt{IRQ\_O} pin.
+Each bit of TRIGGER\_STATUS register is set ('1') if an trigger condition is detected on the corresponding \texttt{GPIO\_I[n]} input according to the settings of TRIGGER\_TYPE and TRIGGER\_LVL0/1. If both TRIGGER\_STATUS[n] and IRQ\_ENABLE[n] are set ('1'), an interrupt is generated on the \texttt{IRQ\_O} pin.
 
 TRIGGER\_STATUS may be read to determine if a trigger condition has occured on the corresponding input. Writing a '1' to TRIGGER\_STATUS[n] will clear the status, unless a new trigger is detect simultaneously, in which case TRIGGER\_STATUS[n] will remain set.
 
@@ -174,7 +171,7 @@ TRIGGER\_STATUS may be read to determine if a trigger condition has occured on t
 
 IRQ\_ENABLE is a \texttt{PDATA\_SIZE} bits wide Read/Write register accessible at address \texttt{0x8}.
 
-IRQ\_ENABLE determines if the \texttt{IRQ\_O} pin will be asserted when a trigger condition occurs, and so enabling if interupts are generated from the APB4 GPIO core
+Each bit of IRQ\_ENABLE determines if the \texttt{IRQ\_O} pin will be asserted when a trigger condition occurs on the corresponding \texttt{GPIO\_I[n]} input, and so enabling if interupts are generated from the APB4 GPIO core.
 
 \begin{longtable}[]{@{}cl@{}}
 \toprule
