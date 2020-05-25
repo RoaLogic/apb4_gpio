@@ -17,14 +17,12 @@ bi-directional bus as shown below:
 	\label{fig:apb4-gpio-sys}
 \end{figure}
 
-The core operates synchronously with the APB4 Bus Clock. Inputs may be
-asynchronous to this bus clock and therefore the implements configurable
-length synchronisation
+The core operates synchronously with the APB4 Bus Clock. The core synchronises all inputs to the APB4 Bus Clock domain.
 
 \section{Operating Modes}\label{operating-modes}
 
 The core supports bidirectional IO pads as shown in Figure 3, where each
-IO may operate in a push-pull or open-drain mode. The mode of each IO is
+IO can be programmed to operate in push-pull or open-drain mode. The mode of each IO is
 defined via the MODE register.
 
 \begin{longtable}[]{@{}|p{2cm}p{12cm}@{}}
@@ -39,7 +37,7 @@ defined via the MODE register.
 
 In push-pull mode, the \texttt{GPIO\_O} bus is driven from an internal \texttt{OUTPUT}
 register and \texttt{GPIO\_OE} is controlled via the
-DIRECTION register 
+DIRECTION register
 
 Logically the push-pull mode is configured as follows:
 
@@ -70,4 +68,6 @@ The inclusion of technology specific IO Pads is not part of the APB4
 GPIO core and instead left to the designer. Pads may be behaviourally
 inferred however as follows:
 
-\texttt{PAD[n] <= GPIO\_OE[n] ? GPIO\_O[n] : 1'bz;}
+\texttt{PAD[n] = GPIO\_OE[n] ? GPIO\_O[n] : 1'bz;}
+
+\texttt{GPIO\_I[n] = PAD[n];}

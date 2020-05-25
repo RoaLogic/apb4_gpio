@@ -14,7 +14,7 @@ Parameter & Type & Default & Description\tabularnewline
 \midrule
 \endhead
 \texttt{PDATA\_SIZE} & Integer & 8 & APB4 Data Bus \& GPIO Size\tabularnewline
-\texttt{INPUT\_STAGES} & Integer & 3 & Number of \texttt{GPIO\_I} input synchronization
+\texttt{INPUT\_STAGES} & Integer & 2 & Number of \texttt{GPIO\_I} input synchronization
 stages\tabularnewline
 \bottomrule
 \caption{Core Parameters}
@@ -37,7 +37,7 @@ Increasing this parameter reduces the possibility of metastability due
 to input signals changing state while being sampled, but at the cost of
 increased latency.
 
-The minimum and default value of the \texttt{INPUT\_STAGES} parameter is 3
+The minimum value of the \texttt{INPUT\_STAGES} parameter is 2
 
 \subsection{Registers}\label{registers}
 
@@ -49,12 +49,15 @@ described below:
 \textbf{Register} & \textbf{Address} & \textbf{Access} & \textbf{Function}\tabularnewline
 \midrule
 \endhead
-\texttt{INPUT} & \texttt{Base + 0x3} & Read Only & Input Data Store\tabularnewline
+\texttt{MODE} & \texttt{Base + 0x0} & Read/Write & Push-Pull or Open-Drain Mode\tabularnewline
+\texttt{DIRECTION} & \texttt{Base + 0x1} & Read/Write & Output Enable control\tabularnewline
 \texttt{OUTPUT} & \texttt{Base + 0x2} & Read/Write & Output Data Store\tabularnewline
-\texttt{DIRECTION} & \texttt{Base + 0x1} & Read/Write & Output Enable
-control\tabularnewline
-\texttt{MODE} & \texttt{Base + 0x0} & Read/Write & Push-Pull or Open-Drain
-Mode\tabularnewline
+\texttt{INPUT} & \texttt{Base + 0x3} & Read Only & Input Data Store\tabularnewline
+\texttt{TRIGGER\_TYPE} & \texttt{Base + 0x4} & Read/Write & Trigger Type\tabularnewline
+\texttt{TRIGGER\_LVL0} & \texttt{Base + 0x5} & Read/Write & Trigger Level Sense 0\tabularnewline
+\texttt{TRIGGER\_LVL1} & \texttt{Base + 0x6} & Read/Write & Trigger Level Sense 1\tabularnewline
+\texttt{TRIGGER\_STATUS} & \texttt{Base + 0x7} & Read/Write & Trigger Status\tabularnewline
+\texttt{IRQ\_ENABLE} & \texttt{Base + 0x8} & Read/Write & Enable Interrupts\tabularnewline
 \bottomrule
 \caption{User Registers}
 \end{longtable}
@@ -116,7 +119,5 @@ In push-pull mode, data written to the OUTPUT register directly drives
 the output bus \texttt{GPIO\_O}. The \texttt{DIRECTION} register is then used to enable
 \texttt{GPIO\_O} to drive the IO pad when set to `Output' mode (`1').
 
-In open-drain mode, \texttt{GPIO\_O} is permanently driven low (`0') and the
-OUTPUT register sets \texttt{GPIO\_OE} to `Output' to assert a logic `0' on the
-bus, or `Input' (i.e. High-Z) to assert a logic `1'.
+In open-drain mode, \texttt{GPIO\_O} is connected such that the IO Pad is driven low ('0') when the output is '0' and is High-Z, pulled high via an external resistor, when the output is '1'.
 

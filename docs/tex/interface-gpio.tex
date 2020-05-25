@@ -8,6 +8,7 @@ Port & Size & Direction & Description\tabularnewline
 \texttt{GPIO\_I} & \texttt{PDATA\_SIZE} & Input & Input Signals\tabularnewline
 \texttt{GPIO\_O} & \texttt{PDATA\_SIZE} & Output & Output Signals\tabularnewline
 \texttt{GPIO\_OE} & \texttt{PDATA\_SIZE} & Output & Output Enable Signal\tabularnewline
+\texttt{IRQ\_O} & 1 & Output & IRQ Output Signal\tabularnewline
 \bottomrule
 \caption{GPIO Interface Signals}
 \end{longtable}
@@ -17,7 +18,7 @@ Port & Size & Direction & Description\tabularnewline
 \texttt{GPIO\_I} is the input bus. The bus is \texttt{PDATA\_SIZE} bits wide and each bit
 is sampled on the rising edge of the APB4 bus clock \texttt{PCLK}. As the inputs
 may be asynchronous to the bus clock, synchronisation is implemented
-within the core. 
+within the core.
 
 \subsection{GPIO\_O}\label{gpio_o}
 
@@ -36,3 +37,8 @@ buffer whose input is driven the \texttt{GPIO\_O} bus
 In open-drain mode the \texttt{GPIO\_OE} bus is used to enable a logic `0' to be
 driven from the \texttt{GPIO\_O} bus, and a logic '1' by disabling (`High-Z') the
 output buffer.
+
+\subsection{IRQ\_O}\label{irq_o}
+
+\texttt{IRQ\_O} description...
+
