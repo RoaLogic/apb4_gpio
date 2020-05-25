@@ -1,4 +1,4 @@
-\documentclass[oneside,11pt]{book}
+\documentclass[a4paper,oneside,11pt,openany]{book}
 % \usepackage{showframe}
 
 % Document Setup
@@ -9,15 +9,12 @@
 
 %\layout{}
 
-\maketitle
+  \frontmatter
+  \maketitle
+  \tableofcontents
+  % \listoftodos
 
-\frontmatter
-
-\tableofcontents
-
-% \listoftodos % Temporary list of ToDo items
-
-\mainmatter
+  \mainmatter
 
 \input{tex/introduction.tex}
 
@@ -30,7 +27,7 @@
 \input{tex/resources.tex}
 
 \input{tex/references.tex}
-	
+
 \input{tex/history.tex}
 
 
