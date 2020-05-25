@@ -20,7 +20,7 @@ The APB4 GPIO Core is fully parameterised core designed to provide a user-define
 
 The IO are accessible via an *AMBA APB v2.0 Specification* interface – typically referred to as APB4 – with the core operating synchronously at the rising edge of the APB4 Bus Clock..
 
-GPIO I=inputs to the core may operate asynchronously to the core and will be automatically synchronised to the bus clock. Outputs may be configured to operate in push-pull mode or open-drain.
+GPIO inputs to the core may operate asynchronously to the core and will be automatically synchronised to the bus clock. Outputs may be configured to operate in push-pull mode or open-drain.
 
 GPIO inputs may also be individually configured to generate a level or edge sensitive interrupt. A single IRQ output is provided to connect to the host.
 
@@ -70,7 +70,7 @@ Logically the push-pull mode is configured as follows:
 
 #### Open-Drain Mode
 
-In open-drain mode, each bit of GPIO\_O is always driven low (‘0’) and individual `GPIO_OE` signals enable (i.e. Logic ‘0’) or high-Z (Logic ‘1’) the output buffer corresponding to the value of the OUTPUT register.
+In open-drain mode, each bit of GPIO\_O is always driven low (‘0’) and individual `GPIO_OE` signals enable (i.e. Logic ‘0’) or Hi-Z (Logic ‘1’) the output buffer corresponding to the value of the OUTPUT register.
 
 ![Open Drain Configuration<span data-label="fig:apb4-gpio-od"></span>](assets/img/apb4-gpio-od.png)
 
@@ -93,7 +93,7 @@ The Roa Logic AHB-Lite APB4 GPIO is a fully configurable General Purpose Input/O
 | Parameter      |   Type  | Default | Description                                     |
 |:---------------|:-------:|:-------:|:------------------------------------------------|
 | `PDATA_SIZE`   | Integer |    8    | APB4 Data Bus & GPIO Size                       |
-| `INPUT_STAGES` | Integer |    2    | Number of `GPIO_I` input synchronization stages |
+| `INPUT_STAGES` | Integer |    2    | Number of `GPIO_I` input synchronisation stages |
 
 #### PDATA\_SIZE
 
@@ -293,7 +293,7 @@ There is one `PSTRB` signal per byte lane of the APB4 write data bus (`PWDATA`).
 
 The specific functionality of the `GPIO_OE` bus is defined by the `MODE` register. In push-pull mode it is used to enable a bidirectional output buffer whose input is driven the `GPIO_O` bus
 
-In open-drain mode the `GPIO_OE` bus is used to enable a logic ‘0’ to be driven from the `GPIO_O` bus, and a logic ’1’ by disabling (‘High-Z’) the output buffer.
+In open-drain mode the `GPIO_OE` bus is used to enable a logic ‘0’ to be driven from the `GPIO_O` bus, and a logic ’1’ by disabling (‘Hi-Z’) the output buffer.
 
 #### IRQ\_O
 
