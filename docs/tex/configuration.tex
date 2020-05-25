@@ -71,7 +71,7 @@ In push-pull mode, data written to the OUTPUT register directly drives
 the output bus \texttt{GPIO\_O}. The \texttt{DIRECTION} register is then used to enable
 \texttt{GPIO\_O} to drive the IO pad when set to `Output' mode (`1').
 
-In open-drain mode, \texttt{GPIO\_O} is connected such that the IO Pad is driven low ('0') when the output is '0' and is High-Z, pulled high via an external resistor, when the output is '1'.
+In open-drain mode, \texttt{GPIO\_O} is connected such that the IO Pad is driven low ('0') when the output is '0' and is Hi-Z, pulled high via an external resistor, when the output is '1'.
 
 \subsection{DIRECTION}\label{direction}
 
@@ -92,7 +92,7 @@ DIRECTION is a \texttt{PDATA\_SIZE} bits wide active-high read/write register, a
 
 OUTPUT is a \texttt{PDATA\_SIZE} bits wide read/write register accessible at the address \texttt{0x2}.
 
-Each bit of the OUTPUT register specifies the \texttt{PAD[n]} level when \texttt{GPIO[n]} is programmed as an output. Writing a ‘0’ drives a low level onto \texttt{PAD[n]}, whereas writing a ‘1’ drives a ‘1’ (push-pull) or high-z(open-drain) onto \texttt{PAD[n]}.
+Each bit of the OUTPUT register specifies the \texttt{PAD[n]} level when \texttt{GPIO[n]} is programmed as an output. Writing a ‘0’ drives a low level onto \texttt{PAD[n]}, whereas writing a ‘1’ drives a ‘1’ (push-pull) or Hi-Z(open-drain) onto \texttt{PAD[n]}.
 
 \subsection{INPUT}\label{input}
 

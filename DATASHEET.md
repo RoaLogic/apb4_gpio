@@ -130,7 +130,7 @@ MODE is a PDATA\_SIZE bits wide Read/Write register accessible at the address 0x
 
 In push-pull mode, data written to the OUTPUT register directly drives the output bus `GPIO_O`. The `DIRECTION` register is then used to enable `GPIO_O` to drive the IO pad when set to ‘Output’ mode (‘1’).
 
-In open-drain mode, `GPIO_O` is connected such that the IO Pad is driven low (’0’) when the output is ’0’ and is High-Z, pulled high via an external resistor, when the output is ’1’.
+In open-drain mode, `GPIO_O` is connected such that the IO Pad is driven low (’0’) when the output is ’0’ and is Hi-Z, pulled high via an external resistor, when the output is ’1’.
 
 #### DIRECTION
 
@@ -145,7 +145,7 @@ DIRECTION is a `PDATA_SIZE` bits wide active-high read/write register, accessibl
 
 OUTPUT is a `PDATA_SIZE` bits wide read/write register accessible at the address `0x2`.
 
-Each bit of the OUTPUT register specifies the `PAD[n]` level when `GPIO[n]` is programmed as an output. Writing a ‘0’ drives a low level onto `PAD[n]`, whereas writing a ‘1’ drives a ‘1’ (push-pull) or high-z(open-drain) onto `PAD[n]`.
+Each bit of the OUTPUT register specifies the `PAD[n]` level when `GPIO[n]` is programmed as an output. Writing a ‘0’ drives a low level onto `PAD[n]`, whereas writing a ‘1’ drives a ‘1’ (push-pull) or Hi-Z(open-drain) onto `PAD[n]`.
 
 #### INPUT
 
