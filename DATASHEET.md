@@ -18,7 +18,7 @@ Author: Roa Logic
 
 The APB4 GPIO Core is fully parameterised core designed to provide a user-defined number of general purpose, bidirectional IO to a design.
 
-The IO are accessible via an *AMBA APB v2.0 Specification* interface – typically referred to as APB4 – with the core operating synchronously at the rising edge of the APB4 Bus Clock..
+The IO are accessible via an *AMBA APB v2.0 Specification* interface – typically referred to as APB4 – with the core operating synchronously at the rising edge of the APB4 Bus Clock.
 
 GPIO inputs to the core may operate asynchronously to the core and will be automatically synchronised to the bus clock. Outputs may be configured to operate in push-pull mode or open-drain.
 
@@ -38,7 +38,7 @@ GPIO inputs may also be individually configured to generate a level or edge sens
 
 -   Programmable IRQ generation
 
--   Each General input individually configurable as a level or edge triggered interrupt.
+-   Each General Input individually configurable as a level or edge triggered interrupt.
 
 ## Specifications
 
@@ -316,6 +316,6 @@ Note: This table will be updated as more examples are compiled.
 |   **Date**  | **Rev.** | **Comments**                 |
 |:-----------:|:--------:|:-----------------------------|
 | 13-Oct-2017 |    1.0   | Initial Release              |
-| 28-May-2020 |    2.0   | Added interrupt capabilities |
+| 25-May-2020 |    2.0   | Added interrupt capabilities |
 |             |          |                              |
 |             |          |                              |
