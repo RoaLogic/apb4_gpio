@@ -6,6 +6,8 @@ The IO are accessible via an [AMBA APB v2.0 Specification](http://infocenter.arm
 
 Inputs to the core may operate asynchronously to the core and will be automatically synchronised to the bus clock. Outputs may be configured to operate in push-pull mode or open-drain
 
+GPIO inputs may also be individually configured to generate a level or edge sensitive interrupt. A single IRQ output is provided to connect to the host.
+
 ![apb4-gpio-sys](assets/img/apb4-gpio-sys.png)
 
 ## Documentation
@@ -18,6 +20,8 @@ Inputs to the core may operate asynchronously to the core and will be automatica
 - User-defined number of Bi-directional General Purpose IO
 - Automatic synchronisation of General Inputs to Bus Clock
 - Each General Output configurable as push-pull or open-drain
+- Programmable IRQ generation
+- Each General Input individually configurable as a level or edge triggered interrupt.
 
 ## Interfaces
 
