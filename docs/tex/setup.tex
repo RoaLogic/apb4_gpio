@@ -1,13 +1,17 @@
 % Load Roalogic Title Page Generator
 \usepackage{pkg/roalogictitle}
 
+\graphicspath{ {./assets/img/} }
+
 % Document Variables
 
 \title{APB4 GPIO}
+\heading{APB4 General Purpose IO}
 \author{Roa Logic}
-\date{October, 2017}
+\date{25-May-2020}
+\version{2.0}
 \doctype{Datasheet}
-\project{http://roalogic.github.io/plic}
+\project{\url{https://roalogic.github.io/apb4\_gpio}}
 \author{Paul Hardy}
 
  % Set page headers/footer
@@ -16,6 +20,6 @@
 % \fancyhead[LE,RO]{\thepage}
 % \fancyhead[RE,LO]{APB4 GPIO}
 % \fancyfoot[CE,CO]{\textcircled{c} Roa Logic}
-\fancyhead[R]{\thepage}
-\fancyhead[L]{APB4 GPIO}
-\fancyfoot[C]{\textcircled{c} Roa Logic}
+\fancyhead[L]{\theheading\space(v\theversion)}
+\fancyhead[R]{\includegraphics[width=50px,trim=0 25px 0 0]{assets/img/RoaLogicHeader}}
+\fancyfoot[C]{\thepage}
